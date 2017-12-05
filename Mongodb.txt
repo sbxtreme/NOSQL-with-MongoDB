@@ -1,0 +1,37 @@
+/****************************************/
+/****************************************/
+/  INTRODUCTION TO MONGODB - DOC TYPE DB /
+/****************************************/
+/****************************************/
+
+
+Mongo db is a document based NOSQL database.
+It uses BSON for storing data in database.
+It stores unstructured data in BSON format.
+It is not relational database.
+It's an opensource database.
+The data is stored in the form of collections.
+The database is schemaless i.e there is no restriction or predefined columns with datatypes to store specific values.
+
+Mongodb vs RDBMS
+
+1) collections vs tables
+2) documents(BSON) vs rows
+3) fields vs columns
+
+Structure of Mongodb:
+
+Database--> Collections--> Documents
+
+In order to connect to mongodb following needs to be done.
+1) install mongodb
+2) set environment path
+3) go to cmd and type mongod.exe which is mongodb demon.
+4) open another cmd and type mongo.exe to start mongo cmd prompt.
+5) instead of mongo cmd prompt we can use studio 3t which gives additional features and from there we can perform different database operations.
+6) In the tool create connection and open Intellishell and start writing mongodb commands.
+
+**** mongodb commands in seperate file named mongo.js ****
+
+
+

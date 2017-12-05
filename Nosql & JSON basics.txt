@@ -1,0 +1,68 @@
+/****************************************/
+/****************************************/
+/      INTRODUCTION TO NOSQL & JSON	 /
+/****************************************/
+/****************************************/
+
+
+For non structured data we use json.
+
+JSON stands for javascript object notation.
+
+Json is based on javascript which is basically a standard to exchange data between client and server. Before Json , xml was used to exchange data between systems but JSON being easy to read, light and less complicated is used mostly now and becoming the standard for data exchange.
+
+In Json there is a concept of key:value pairs. In a json object there can be number of key value pairs and again inside key there can be json objects which further can be treated as key:values or can have json array inside json object.
+
+ex:
+
+JSON inside JSON object:
+------------------------
+myObj = {
+    "name":"John",
+    "age":30,
+    "cars": {
+        "car1":"Ford",
+        "car2":"BMW",
+        "car3":"Fiat"
+    }
+ }
+
+
+Array inside Json object:
+-------------------------
+
+{
+"name":"John",
+"age":30,
+"cars":[ "Ford", "BMW", "Fiat" ]
+}
+
+
+Data types in JSON:
+-------------------
+
+1) Numbers: No difference between integer and float
+2) String: Use double quotes to represent the strings
+3) Boolean: True or False
+4) Arrays: Ordered list of values
+5) Objects: combination of key-value pairs
+6) NULL: Empty values
+
+
+Example :
+
+{
+	"name": "Shobhit",
+	"age": 26,
+	"address": {
+		"street": "MGROAD",
+		"city": "Gurgaon",
+		"state": "Haryana",
+		"pin": 122001
+	},
+	"organization": "ITC",
+	"technology": ["Mongodb", "Machine Learning", "Python", "SQL", "Informatica", "UNIX"]
+}
+
+The data is stored in Mongodb in BSON format which is a superset of JSON. The binary json in called BSON.
+In order to perform operations on unstructured data we use NOSQL ( not only structured query language).
