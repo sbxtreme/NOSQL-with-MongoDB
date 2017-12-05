@@ -1,0 +1,291 @@
+/****************************************/
+/****************************************/
+/      INTRODUCTION TO NOSQL & JSON	 /
+/****************************************/
+/****************************************/
+
+
+For non structured data we use json.
+
+JSON stands for javascript object notation.
+
+Json is based on javascript which is basically a standard to exchange data between client and server. Before Json , xml was used to exchange data between systems but JSON being easy to read, light and less complicated is used mostly now and becoming the standard for data exchange.
+
+In Json there is a concept of key:value pairs. In a json object there can be number of key value pairs and again inside key there can be json objects which further can be treated as key:values or can have json array inside json object.
+
+ex:
+
+JSON inside JSON object:
+------------------------
+myObj = {
+    "name":"John",
+    "age":30,
+    "cars": {
+        "car1":"Ford",
+        "car2":"BMW",
+        "car3":"Fiat"
+    }
+ }
+
+
+Array inside Json object:
+-------------------------
+
+{
+"name":"John",
+"age":30,
+"cars":[ "Ford", "BMW", "Fiat" ]
+}
+
+
+Data types in JSON:
+-------------------
+
+1) Numbers: No difference between integer and float
+2) String: Use double quotes to represent the strings
+3) Boolean: True or False
+4) Arrays: Ordered list of values
+5) Objects: combination of key-value pairs
+6) NULL: Empty values
+
+
+Example :
+
+{
+	"name": "Shobhit",
+	"age": 26,
+	"address": {
+		"street": "MGROAD",
+		"city": "Gurgaon",
+		"state": "Haryana",
+		"pin": 122001
+	},
+	"organization": "ITC",
+	"technology": ["Mongodb", "Machine Learning", "Python", "SQL", "Informatica", "UNIX"]
+}
+
+The data is stored in Mongodb in BSON format which is a superset of JSON. The binary json in called BSON.
+In order to perform operations on unstructured data we use NOSQL ( not only structured query language).
+
+
+/****************************************/
+/****************************************/
+/  INTRODUCTION TO MONGODB - DOC TYPE DB /
+/****************************************/
+/****************************************/
+
+
+Mongo db is a document based NOSQL database.
+It uses BSON for storing data in database.
+It stores unstructured data in BSON format.
+It is not relational database.
+It's an opensource database.
+The data is stored in the form of collections.
+The database is schemaless i.e there is no restriction or predefined columns with datatypes to store specific values.
+
+Mongodb vs RDBMS
+
+1) collections vs tables
+2) documents(BSON) vs rows
+3) fields vs columns
+
+Structure of Mongodb:
+
+Database--> Collections--> Documents
+
+In order to connect to mongodb following needs to be done.
+1) install mongodb
+2) set environment path
+3) go to cmd and type mongod.exe which is mongodb demon.
+4) open another cmd and type mongo.exe to start mongo cmd prompt.
+5) instead of mongo cmd prompt we can use studio 3t which gives additional features and from there we can perform different database operations.
+6) In the tool create connection and open Intellishell and start writing mongodb commands.
+
+
+/****************************************/
+/****************************************/
+/             MongoDB Commands           /
+/****************************************/
+/****************************************/
+
+
+//*************** database-->collections(tables in RDBMS)-->documents(rows in RDBMS) ******************
+
+// list current database
+db
+
+// create or switch database
+use database1
+use database2
+
+// show databases
+show dbs // the newly created databases are not show because there is no documents in it.
+
+// command to insert document ( the document is in JSON format i.e key-value pairs )
+db.mycollection.insert({
+	"name": "Shobhit",
+	"age": 26,
+	"address": {
+		"street": "MGROAD",
+		"city": "Gurgaon",
+		"state": "Haryana",
+		"pin": 122001
+	},
+	"organization": "ITC",
+	"technology": ["Mongodb", "Machine Learning", "Python", "SQL", "Informatica"]
+}
+)
+
+// inserting document in database2
+use database2
+db.mycollection.insert({
+	"name": "Shobhit",
+	"age": 26,
+	"address": {
+		"street": "MGROAD",
+		"city": "Gurgaon",
+		"state": "Haryana",
+		"pin": 122001
+	},
+	"organization": "ITC",
+	"technology": ["Mongodb", "Machine Learning", "Python", "SQL", "Informatica"]
+}
+)
+
+// command to drop database. The below command will drop the current database in which the user is switched in.
+db.dropDatabase()
+
+// command to create collections in database
+db.createCollection("mycollection_1")
+db.createCollection("mycollection_2")
+// command to see collections present in a database
+show collections
+// command to drop collections -- db.<collection_name>.drop()
+db.mycollection_2.drop()
+
+// insert bulk in collections ( creating collection named student and inserting records in the form of JSON document.)
+
+db.students.insert
+(
+[
+		{
+			"name":"shobhit",
+			"class":10,
+			"skills":"db",
+		},
+		{
+			"name":"mark",
+			"class":10,
+			"skills":"db2",
+		},
+		{
+			"name":"paul",
+			"class":10,
+			"skills":"db2",
+		},
+		{
+			"name":"henry",
+			"class":11,
+			"skills":"db",
+		},
+		{
+			"name":"alok",
+			"class":12,
+			"skills":"nosqldb",
+		},
+		{
+			"name":"shobhit",
+			"class":10,
+			"skills":"nosqldb",
+		}
+]
+)
+
+
+// command to query the collection inside the database to get documents.
+db.mycollection.find()
+db.students.find()
+db.students.findOne() // will show 1st document from collection students
+db.students.find({"name":"alok"}) // where name = 'alok'
+db.students.find({"class":10}) // where class=10
+db.students.find      // will show class greater than 10
+(
+	{
+		"class": {$gt : 10}
+	}
+)
+
+db.students.find // will show class greater than or equal to 11
+(
+	{
+		"class": {$gte : 11}
+	}
+)
+
+db.students.find // will show class less than or equal to 11
+(
+	{
+		"class":{$lte : 11}
+	}
+)
+
+db.students.find
+(
+	{
+		"class":{$ne :10}
+	}
+)
+
+// the below command uses AND condition in a collection to get documents
+db.students.find({"class":10,"skills":"db"}) // here , is used as AND condition
+
+// the below command uses OR condition in a collection to get documents
+db.students.find
+(
+	{
+		$or : [{"name":"shobhit"},{"class":12}]
+	}
+)
+
+
+// the below command uses AND and OR conditions
+db.students.find
+(
+{
+  "name":"shobhit" , $or : [{"class":10},{"skills":"db"}]
+}
+)
+
+
+// command to update the documents inside collections
+db.students.update
+(
+	{"name":"shobhit"},  // condition on which update will run
+	{$set:{"skills":"Mongodb"}}, // key's value which needs to be updated
+	{multi:true} // if there are multiple documents which needs to be updated in 1 go then use multi:true (by default mongo will only update 1st row)
+)
+
+
+// command to update / insert data using json (document) supplied to the command
+db.students.save    // save method is used to update / insert document based on id present in collection
+(
+	{ 
+		"_id" : ObjectId("5a26b783ec58bcc914a0cae1"),   // if this id is not present in collection then it will insert else it will update
+		"name" : "Johny", 
+		"class" : 10.0, 
+		"skills" : "Mongod"
+	}
+)
+
+
+// command to delete documents from a collection
+db.students.remove()  // the command will delete all the documents from collection , so be careful with this command.
+db.students.remove({"name" : "shobhit"}) // here we give condition based on which the documents will be deleted/removed from collection
+db.students.remove({"name" : "shobhit"},1) // if 2 documents satisfies the conditions then passing 1 will delete only 1 document
+// OR and AND conditions can be used to remove the documents 
+db.students.remove
+(
+	{
+		$or : [{"skills":"db"},{"skills":"db2"}]
+	}
+)
