@@ -31,6 +31,28 @@ In order to connect to mongodb following needs to be done.
 5) instead of mongo cmd prompt we can use studio 3t which gives additional features and from there we can perform different database operations.
 6) In the tool create connection and open Intellishell and start writing mongodb commands.
 
+
+Features of Mongodb:
+++++++++++++++++++++
+Ad-hoc queries
+***************
+MongoDB supports field, range queries, regular expression searches.Queries can return specific fields of documents and also include user-defined JavaScript functions. Queries can also be configured to return a random sample of results of a given size.
+Indexing
+***************
+Fields in a MongoDB document can be indexed with primary and secondary indices.
+
+Replication
+************
+MongoDB provides high availability with replica sets.A replica set consists of two or more copies of the data. Each replica set member may act in the role of primary or secondary replica at any time. All writes and reads are done on the primary replica by default. Secondary replicas maintain a copy of the data of the primary using built-in replication. When a primary replica fails, the replica set automatically conducts an election process to determine which secondary should become the primary. Secondaries can optionally serve read operations, but that data is only eventually consistent by default.
+
+Load balancing
+***************
+MongoDB scales horizontally using sharding. The user chooses a shard key, which determines how the data in a collection will be distributed. The data is split into ranges (based on the shard key) and distributed across multiple shards. (A shard is a master with one or more slaves.). Alternatively, the shard key can be hashed to map to a shard – enabling an even data distribution.MongoDB can run over multiple servers, balancing the load or duplicating data to keep the system up and running in case of hardware failure.
+
+File storage
+*************
+MongoDB can be used as a file system with load balancing and data replication features over multiple machines for storing files.This function, called grid file system, is included with MongoDB drivers. MongoDB exposes functions for file manipulation and content to developers. GridFS is used in plugins for Nginx and lighttpd.GridFS divides a file into parts, or chunks, and stores each of those chunks as a separate document.
+
 **** mongodb commands in seperate file named mongo.js ****
 
 
