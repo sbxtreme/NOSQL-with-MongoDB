@@ -178,3 +178,47 @@ db.students.remove
 		$or : [{"skills":"db"},{"skills":"db2"}]
 	}
 )
+
+// Projection in Mongodb i.e selecting only the specific data attribute(columns) from all the documents(records) present in a collection(table)
+db.students.find({},{"name":1}) // it will show only name attribute and hide all others
+db.students.find({},{"name":0}) // it will hide name attributes and will show all others
+// by default _id is always shown while executing the above command so we need to explicitly disable it. To do so we use the below command
+db.students.find({},{"name":1,"_id":0}) // it will only show name -- no id along with name
+
+// Limit, skip and sort operations on documents in a collection.
+db.students.find().skip(2) // this will skip first 2 records and will show last 4 records
+db.students.find().limit(4) // this will show 1st 4 rocords and skip last 2 records
+db.students.find().sort({"name":-1}) // this will sort the documents based on name attribute in decending order
+db.students.find().sort({"name":1}) // this will sort the documents based on name attribute in ascending order
+
+// command to create index
+//-- the below command creates documents using loop --
+for (i=0;i<1000000;++i)
+{
+	db.largecoll.insert({"sid":i,"subject":"maths"})
+}
+// the below command creates index on sid in the documents
+db.largecoll.ensureIndex({"sid":1})
+// the below command is to drop index
+db.largecoll.dropIndex({"sid":1})
+
+
+// commands to use aggrigation function based on grouping in documents
+db.stu.aggregate
+(
+	[
+		{$group:{_id:"$gender",result:{$sum:1}}}
+	]
+)
+db.stu.aggregate
+(
+	[
+		{$group:{_id:"$gender",result:{$max:"$class"}}}
+	]
+)
+db.stu.aggregate
+(
+	[
+		{$group:{_id:"$gender",result:{$min:"$class"}}}
+	]
+)
